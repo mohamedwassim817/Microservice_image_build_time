@@ -6,19 +6,22 @@
 #serveurs=find ./serv* -d
 
 
-echo "$(ls -l serv* | grep serv | awk '{print($1)}')" > f.txt
+echo "$(ls -l serv* | grep serv | awk '{print($1)}')" > file.txt
 
-sed -i 's/://g' f.txt 
+sed -i 's/://g' file.txt 
 
-serveurs=$(cat f.txt) 
-premierserveur=$(cat f.txt | head -n1) 
-Nbserveur=$(cat f.txt | wc -l)
+serveurs=$(cat file.txt) 
+
+premierserveur=$(cat file.txt | head -n1) 
+
+Nbserveur=$(cat file.txt | wc -l)
 
 echo "$serveurs"
 
 echo "$Nbserveur"
 
 echo "$premierserveur"
+
 
 #faire un build pour chaque dockerfile dans le dossiers et ajouter le code dans a.html
 
@@ -36,4 +39,4 @@ echo "$premierserveur"
 
  done
 
-
+docker run -itd -p 8080:80 --name nginxserver nginx
