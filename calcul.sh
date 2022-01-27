@@ -18,17 +18,22 @@ echo "$serveurs"
 
 echo "$Nbserveur"
 
+echo "$premierserveur"
+
 #faire un build pour chaque dockerfile dans le dossiers et ajouter le code dans a.html
 
-for nb in (seq 1 $Nbserveur)
-do
+
  
- for image in (seq $premierserveur $serveurs)
+ for image in $premierserveur .. $serveurs 
  do
-   
- echo "<p>$(docker build --no-cache .)</p>" | grep $image >> usr/data/html/a.html 
+   echo "******$image"
+
+     cd ~/Desktop/microservice/$image
+
+ vari=$(docker build --no-cache . | grep $image)
+  
+ echo "<p>$vari</p>"  >> /usr/data/html/a.html 
 
  done
 
-done
 
